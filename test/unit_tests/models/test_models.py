@@ -49,6 +49,7 @@ from braindecode.models import (
     FBCNet,
     FBLightConvNet,
     FBMSNet,
+    GCNsNet,
     HybridNet,
     IFNet,
     Labram,
@@ -1451,6 +1452,34 @@ def test_dgcnn_dummy(n_times, n_chans, sfreq, n_outputs):
         chs_info=chs_info,
     )
     check_forward_pass_3d(model, input_sizes)
+
+
+@pytest.mark.parametrize(
+    "n_times, n_chans, n_outputs",
+    [
+        (128, 64, 2),
+        (256, 128, 4),
+    ],
+)
+def test_gcnsnet_dummy(n_times, n_chans, n_outputs):
+    batch_size = 8
+
+    identity_laplacians = tuple(
+        torch.eye(n_chans // (2**i))
+        for i in range(6)
+    )
+
+    model = GCNsNet(
+        n_chans=n_chans,
+        n_outputs=n_outputs,
+        n_times=n_times,
+        laplacians=identity_laplacians,
+    )
+
+    x = torch.randn(batch_size, n_chans, n_times)
+    output = model(x)
+
+    assert output.shape == (batch_size, n_outputs, n_times)
 
 
 @pytest.mark.parametrize(
