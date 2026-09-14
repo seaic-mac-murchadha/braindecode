@@ -31,7 +31,7 @@ from .emg2qwerty import EMG2QwertyNet
 from .fbcnet import FBCNet
 from .fblightconvnet import FBLightConvNet
 from .fbmsnet import FBMSNet
-from .gcns_net import GCNsNet
+from .gcnsnet import GCNsNet
 from .hybrid import HybridNet
 from .ifnet import IFNet
 from .interpolated import InterpolatedModel
