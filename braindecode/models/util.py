@@ -483,6 +483,7 @@ models_mandatory_parameters: list[
         {"n_chans": 19, "n_times": 6000},
     ),
     ("DGCNN", ["n_chans", "n_outputs", "n_times", "chs_info"], None),
+    ("GCNsNet", ["n_chans", "n_outputs", "n_times"], None),
     ("EEGDINO", ["n_chans", "n_outputs", "n_times"], None),
     (
         "DANCE",
